@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.urls import path
+from django_qiyu_utils.settings import SERVE_FILE_URLS
 
 from core.views import (
     IndexView,
@@ -47,7 +48,7 @@ urlpatterns = [
     path("ping/", PingView.as_view(), name="ping"),
 ]
 
+urlpatterns += SERVE_FILE_URLS
+
 if settings.DEBUG:
-    urlpatterns = urlpatterns + static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
+    urlpatterns += [static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)]
